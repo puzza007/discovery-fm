@@ -6,7 +6,7 @@
 
 ## Tech Stack
 
-- Python 3.10+
+- Python 3.13+
 - uv for dependency management
 - pylast for Last.fm API
 - spotipy for Spotify API

@@ -59,14 +59,16 @@ def main(
     user_months: Annotated[
         int,
         typer.Option(
-            "--user-months", "-u",
+            "--user-months",
+            "-u",
             help="Months of YOUR history to exclude (use high value to avoid duplicates)",
         ),
     ] = 60,  # 5 years default - we want to exclude everything you've heard
     neighbour_months: Annotated[
         int | None,
         typer.Option(
-            "--neighbour-months", "-m",
+            "--neighbour-months",
+            "-m",
             help="Months of neighbour history to search (defaults to 12)",
         ),
     ] = None,
@@ -141,7 +143,9 @@ def main(
     typer.echo(f"   Found {len(discoveries)} potential discoveries\n")
 
     if not discoveries:
-        typer.echo("No new discoveries found! Your neighbours listen to the same music.")
+        typer.echo(
+            "No new discoveries found! Your neighbours listen to the same music."
+        )
         raise typer.Exit(0)
 
     # Step 5: Order and limit tracks

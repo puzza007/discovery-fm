@@ -99,8 +99,9 @@ class LastFMClient:
 
         try:
             # Use stream=True to get tracks as pages arrive (better progress)
+            # pylast expects int for limit, None means fetch all
             recent = user.get_recent_tracks(
-                limit=limit,
+                limit=limit if limit is not None else 0,
                 time_from=time_from,
                 time_to=time_to,
                 stream=True,
@@ -165,7 +166,10 @@ class LastFMClient:
             if match:
                 neighbour = match.group(1)
                 # Skip the target user themselves
-                if neighbour.lower() != username.lower() and neighbour not in neighbours:
+                if (
+                    neighbour.lower() != username.lower()
+                    and neighbour not in neighbours
+                ):
                     neighbours.append(neighbour)
                     if len(neighbours) >= limit:
                         break
@@ -213,7 +217,9 @@ class LastFMClient:
         track_counts: dict[Track, int] = {}
         failed_neighbours: list[str] = []
 
-        print(f"Fetching tracks from {len(neighbours)} neighbours ({months} months each)...\n")
+        print(
+            f"Fetching tracks from {len(neighbours)} neighbours ({months} months each)...\n"
+        )
 
         for i, neighbour in enumerate(neighbours, 1):
             try:

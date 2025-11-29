@@ -3,7 +3,7 @@ name = "discovery-fm"
 version = "0.1.0"
 description = "Discover music through your Last.fm neighbours - create Spotify playlists from tracks they love that you haven't heard"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.13"
 dependencies = [
     "pylast>=5.2.0",
     "spotipy>=2.23.0",
@@ -12,6 +12,14 @@ dependencies = [
     "tqdm>=4.66.0",
     "beautifulsoup4>=4.12.0",
     "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.8.0",
+    "types-tqdm>=4.66.0",
+    "types-requests>=2.31.0",
+    "types-beautifulsoup4>=4.12.0",
 ]
 
 [project.scripts]
@@ -23,3 +31,9 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/discovery_fm"]
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true

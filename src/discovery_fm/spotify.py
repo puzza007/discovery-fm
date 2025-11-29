@@ -50,9 +50,7 @@ class SpotifyClient:
     RATE_LIMIT = 15  # calls per second
     BATCH_SIZE = 100  # Max tracks per playlist_add_items call
 
-    def __init__(
-        self, client_id: str, client_secret: str, redirect_uri: str
-    ) -> None:
+    def __init__(self, client_id: str, client_secret: str, redirect_uri: str) -> None:
         """Initialize the Spotify client with OAuth.
 
         Args:
@@ -167,7 +165,7 @@ class SpotifyClient:
             public=public,
             description=description,
         )
-        return playlist["id"]
+        return str(playlist["id"])
 
     def add_tracks_to_playlist(
         self, playlist_id: str, track_uris: list[str], max_tracks: int = 10000
